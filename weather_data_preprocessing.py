@@ -64,4 +64,44 @@ def weather_data_pre_processing(weather_files):
     
     return(pd.concat(master_data))
 
-weather_data_pre_processing(weather_files).to_csv("weather_data.csv")
+weather_data=weather_data_pre_processing(weather_files)
+
+"""
+##########################
+function to create timestamp
+##########################
+"""
+
+def time(rows):
+    return (pd.Timestamp(rows[0], rows[1],rows[2],rows[3]))
+
+weather_data['hour'] = weather_data['time'].apply(lambda x: int(str(x)[:-2]) if  (str(x)[:-2]).isdigit() else 0)
+
+weather_data['weather_time_stamp'] = weather_data[['Year','Month','DayofMonth','hour']].apply(time,axis = 'columns')
+
+
+
+weather_data[['windspeedKmph',
+ 'FeelsLikeF',
+ 'winddir16Point',
+ 'FeelsLikeC',
+ 'DewPointC',
+ 'windspeedMiles',
+ 'DewPointF',
+ 'HeatIndexF',
+ 'cloudcover',
+ 'HeatIndexC',
+ 'precipMM',
+ 'WindGustMiles',
+ 'pressure',
+ 'WindGustKmph',
+ 'visibility',
+ 'weatherCode',
+ 'tempC',
+ 'tempF',
+ 'WindChillF',
+ 'WindChillC',
+ 'winddirDegree',
+ 'humidity',
+ 'airport',
+ 'weather_time_stamp']].to_csv("weather_data.csv")
