@@ -2,14 +2,14 @@ import pandas as pd
 import os
 
 
-weather_data_path="/home/inithan/Desktop/git/movie/weather/"
+weather_data_path="/home/inithan/Desktop/git/movie/weather"
 
 #getting all json files name along with their directory for 2016 & 2017
 folders = os.listdir(weather_data_path)
 weather_files=[]
 for folder in folders:
     #print(folder)
-    weather_files=weather_files+([weather_data_path+folder+'/'+i for i in os.listdir(weather_data_path+folder) if any(j in i for j in ['2016','2017'])])
+    weather_files=weather_files+([weather_data_path+"/"+folder+'/'+i for i in os.listdir(weather_data_path+"/"+folder) if any(j in i for j in ['2016','2017'])])
 
 
 """"
@@ -53,7 +53,7 @@ def weather_data_pre_processing(weather_files):
         #print(day)
             for hour in range(len(data['data']['weather'][day]['hourly'])):
                 temp_dict={ key:value for (key,value) in data['data']['weather'][day]['hourly'][hour].items() if key in columns_required}
-                temp=file[40:]
+                temp=file.replace(weather_data_path+"/", '')
                 #print(temp[:temp.find("/")])
                 temp_dict['airport']=temp[:temp.find("/")]
                 temp_dict['Year']=int(temp[temp.find("/")+1:temp.find("/")+5])
