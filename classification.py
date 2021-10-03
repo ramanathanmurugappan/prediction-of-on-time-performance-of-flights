@@ -82,6 +82,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # function to get print mertics for each algorithm
 def model_accuracy(model, X_train, X_test, y_train, y_test):
+    print("*"*10)
     print(model)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
@@ -92,16 +93,19 @@ def model_accuracy(model, X_train, X_test, y_train, y_test):
     print("Recall:", recall)
     print("F1 Score:", f1)
     print(classification_report(y_test, y_pred))
+    print("*"*10)
 
 
 # RAW MODELS -No Sampling
 print("RAW MODELS -No Sampling Models Accuracies")
+print("#"*20)
 model_accuracy(RandomForestClassifier(), X_train, X_test, y_train, y_test)
 model_accuracy(GaussianNB(), X_train, X_test, y_train, y_test)
 model_accuracy(AdaBoostClassifier(), X_train, X_test, y_train, y_test)
 model_accuracy(ExtraTreesClassifier(), X_train, X_test, y_train, y_test)
 model_accuracy(GradientBoostingClassifier(), X_train, X_test, y_train, y_test)
 model_accuracy(LogisticRegression(), X_train, X_test, y_train, y_test)
+print("#"*20)
 
 
 # Random Undersampling
@@ -109,12 +113,14 @@ rus = RandomUnderSampler(random_state=69)
 X_sampled, y_sampled = rus.fit_resample(X_train, y_train)
 
 print("Random Undersampling Models Accuracies")
+print("#"*20)
 model_accuracy(RandomForestClassifier(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(GaussianNB(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(AdaBoostClassifier(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(ExtraTreesClassifier(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(GradientBoostingClassifier(),X_sampled, X_test, y_sampled, y_test)
 model_accuracy(LogisticRegression(), X_sampled, X_test, y_sampled, y_test)
+print("#"*20)
 
 
 # Random Oversampling
@@ -122,13 +128,14 @@ ros = RandomOverSampler(random_state=69)
 X_sampled, y_sampled = ros.fit_resample(X_train, y_train)
 
 print("Random Oversampling Models Accuracies")
+print("#"*20)
 model_accuracy(RandomForestClassifier(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(GaussianNB(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(AdaBoostClassifier(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(ExtraTreesClassifier(), X_sampled, X_test, y_sampled, y_test)
-model_accuracy(GradientBoostingClassifier(),
-               X_sampled, X_test, y_sampled, y_test)
+model_accuracy(GradientBoostingClassifier(),X_sampled, X_test, y_sampled, y_test)
 model_accuracy(LogisticRegression(), X_sampled, X_test, y_sampled, y_test)
+print("#"*20)
 
 
 # SMOTE Oversampling
@@ -136,9 +143,11 @@ smote = SMOTE(random_state=69)
 X_sampled, y_sampled = smote.fit_resample(X_train, y_train)
 
 print("SMOTE Oversampling Models Accuracies")
+print("#"*20)
 model_accuracy(RandomForestClassifier(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(GaussianNB(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(AdaBoostClassifier(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(ExtraTreesClassifier(), X_sampled, X_test, y_sampled, y_test)
 model_accuracy(GradientBoostingClassifier(),X_sampled, X_test, y_sampled, y_test)
 model_accuracy(LogisticRegression(), X_sampled, X_test, y_sampled, y_test)
+print("#"*20)
